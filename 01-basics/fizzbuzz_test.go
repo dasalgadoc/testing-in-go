@@ -26,3 +26,9 @@ func Test_Return_Buzz_If_Divisible_By_3(t *testing.T) {
 	assert.Equal(t, "Buzz", FizzBuzz(10))
 	assert.Equal(t, "Buzz", FizzBuzz(20))
 }
+
+func Test_Return_FizzBuzz_If_Divisible_By_3_And_5(t *testing.T) {
+	assert.Equal(t, "FizzBuzz", FizzBuzz(15))
+	assert.Equal(t, "FizzBuzz", FizzBuzz(30))
+	assert.Equal(t, "FizzBuzz", FizzBuzz(45))
+}
