@@ -28,5 +28,10 @@ go test ./...
 ## 📚 References
 
 - [Testify](https://github.com/stretchr/testify)
+- [Docker test](https://github.com/ory/dockertest)
+- [Test Containers](https://github.com/testcontainers/testcontainers-go)
 - [Go by Example: Testing](https://gobyexample.com/testing)
 - [Go Testing Tutorial](https://tutorialedge.net/golang/intro-testing-in-go/)
+  
+docker exec -it <DOCKER> bash
+mysql -u root -p
