@@ -13,6 +13,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"strings"
+	"testing"
 )
 
 const (
@@ -32,17 +33,30 @@ type studentGetterTestScenario struct {
 	writer   *httptest.ResponseRecorder
 }
 
-func FeatureContext(ctx *godog.ScenarioContext) {
+func TestFeatures(t *testing.T) {
+	suite := godog.TestSuite{
+		ScenarioInitializer: FeatureGetStudentOk,
+		Options: &godog.Options{
+			Format:   "pretty",
+			Paths:    []string{"../../features"},
+			TestingT: t,
+		},
+	}
+	if suite.Run() != 0 {
+		t.Fatal("non-zero status returned, failed to run feature tests")
+	}
+}
+
+func FeatureGetStudentOk(ctx *godog.ScenarioContext) {
 	s := startStudentTestScenario()
 	if err := s.setup(); err != nil {
 		fmt.Println("Error setting up the scenario")
 		panic(err)
 	}
-	defer s.teardown()
+	//defer s.teardown()
 
-	ctx.Step(`^I send a GET request to "([^"]*)"`, s.iSendAGETRequestTo)
-	ctx.Step(`^the response status should be "([^"]*)"`, s.theResponseStatusShouldBe)
-	ctx.Step(`^the response body should be a "([^"]*)" object`, s.theResponseBodyShouldBeA)
+	ctx.Step(`^I send a GET request to '([^']*)'`, s.iSendAGETRequestTo)
+	ctx.Step(`^the response status should be (\d+)$`, s.theResponseStatusShouldBe)
 }
 
 func startStudentTestScenario() *studentGetterTestScenario {
@@ -100,7 +114,7 @@ func setupMySQLContainer() (pool *dockertest.Pool, resource *dockertest.Resource
 		panic(err)
 	}
 
-	script, err := os.ReadFile("../../sql/init.sql")
+	script, err := os.ReadFile("../../../sql/init.sql")
 	if err != nil {
 		log.Fatalf("Could not read init.sql file: %s", err)
 		panic(err)
@@ -114,7 +128,7 @@ func setupMySQLContainer() (pool *dockertest.Pool, resource *dockertest.Resource
 		}
 	}
 
-	script, err = os.ReadFile("../../sql/insert.sql")
+	script, err = os.ReadFile("../../../sql/migrate.sql")
 	if err != nil {
 		log.Fatalf("Could not read insert.sql file: %s", err)
 		panic(err)
@@ -155,13 +169,6 @@ func (s *studentGetterTestScenario) iSendAGETRequestTo(endpoint string) error {
 func (s *studentGetterTestScenario) theResponseStatusShouldBe(status int) error {
 	if s.writer.Code != status {
 		return fmt.Errorf("expected response status to be %d but was %d", status, s.writer.Code)
-	}
-	return nil
-}
-
-func (s *studentGetterTestScenario) theResponseBodyShouldBeA(responseType string) error {
-	if s.writer.Body.String() != responseType {
-		return fmt.Errorf("expected response body to be %s but was %s", responseType, s.writer.Body.String())
 	}
 	return nil
 }

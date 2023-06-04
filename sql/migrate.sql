@@ -1,2 +1,2 @@
 USE test;
-INSERT INTO student(id, name, age) VALUES ('fe7017d8-9e8f-4952-e047e36b1694', 'John Doe', 20);
+INSERT INTO student(id, name, age) VALUES ('45215570-0296-11ee-8566-acde48001122', 'John Doe', 20);

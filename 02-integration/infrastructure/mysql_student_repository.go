@@ -49,7 +49,7 @@ func (r *MysqlStudentRepository) Search(id domain.StudentId) (domain.Student, er
 	row := r.db.QueryRow("SELECT id, name, age FROM student WHERE id = ?", id.Value())
 	var i, s string
 	var a int
-	err := row.Scan(i, s, a)
+	err := row.Scan(&i, &s, &a)
 	if err != nil {
 		return domain.Student{}, err
 	}
