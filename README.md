@@ -30,8 +30,11 @@ go test ./...
 - [Testify](https://github.com/stretchr/testify)
 - [Docker test](https://github.com/ory/dockertest)
 - [Test Containers](https://github.com/testcontainers/testcontainers-go)
+- [Test with Cucumber](https://github.com/cucumber/godog)
 - [Go by Example: Testing](https://gobyexample.com/testing)
 - [Go Testing Tutorial](https://tutorialedge.net/golang/intro-testing-in-go/)
+- [Gin](https://github.com/gin-gonic/gin)
   
 docker exec -it <DOCKER> bash
 mysql -u root -p
+docker ps | awk '{print $1}' | xargs docker stop
