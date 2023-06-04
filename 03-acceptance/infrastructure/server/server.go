@@ -1,12 +1,13 @@
-package api
+package server
 
 import (
+	"dasalgadoc.com/go-testing/03-acceptance/api"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
 )
 
-func StartGinServer(application *Application) *http.Server {
+func StartGinServer(application *api.Application) *http.Server {
 	router := gin.New()
 	Endpoints(application, router)
 	port := application.Config.Api.Port
