@@ -38,3 +38,12 @@ go test ./...
 docker exec -it <DOCKER> bash
 mysql -u root -p
 docker ps | awk '{print $1}' | xargs docker stop
+
+04
+Assert Equals y Assert same
+pararell test
+Make file para flujos de ci
+```bash
+make
+```
+Exclusiones
