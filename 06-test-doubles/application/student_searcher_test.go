@@ -96,7 +96,7 @@ func (s *studentSearcherTestScenario) andStudentMockRepositoryIsOk() {
 }
 
 func (s *studentSearcherTestScenario) andStudentMockRepositoryIsNotFound() {
-	s.studentMock.On("Search", s.student.ID).Return(domain.Student{}, errors.New("something went wrong")).Once()
+	s.studentMock.On("Search", mock.Anything).Return(domain.Student{}, errors.New("something went wrong")).Once()
 }
 
 func (s *studentSearcherTestScenario) whenSearchStudentWithFakeRepo(id string) {
