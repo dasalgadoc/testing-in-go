@@ -12,6 +12,7 @@ type studentSearcherTestScenario struct {
 	student         domain.Student
 	retrieveStudent domain.Student
 	studentFake     repository.StudentRepository
+	studentStub     repository.StudentRepository
 
 	err  error
 	test *testing.T
@@ -27,12 +28,22 @@ func TestStudentSearcher_SearchStudentOnFakeRepo(t *testing.T) {
 	assert.Equal(s.test, s.student, s.retrieveStudent)
 }
 
+func TestStudentSearcher_SearchStudentOnStubRepo(t *testing.T) {
+	s := startStudentSearcherTestScenario(t)
+	s.givenStudent("45215570-0296-11ee-8566-acde48001122", "John Doe", 30)
+	s.whenSearchStudentWithStubRepo("45215570-0296-11ee-8566-acde48001122")
+
+	assert.NoError(s.test, s.err)
+	assert.Equal(s.test, s.student, s.retrieveStudent)
+}
+
 /*-- Steps --*/
 func startStudentSearcherTestScenario(t *testing.T) *studentSearcherTestScenario {
 	t.Parallel()
 
 	return &studentSearcherTestScenario{
 		studentFake: database.NewInMemoryStudentRepository(),
+		studentStub: database.NewStubStudentRepository(),
 		test:        t,
 	}
 }
@@ -68,5 +79,10 @@ func (s *studentSearcherTestScenario) andStudentIsOnFakeRepository() {
 
 func (s *studentSearcherTestScenario) whenSearchStudentWithFakeRepo(id string) {
 	target := NewStudentSearcher(s.studentFake)
+	s.retrieveStudent, s.err = target.SearchStudent(id)
+}
+
+func (s *studentSearcherTestScenario) whenSearchStudentWithStubRepo(id string) {
+	target := NewStudentSearcher(s.studentStub)
 	s.retrieveStudent, s.err = target.SearchStudent(id)
 }
