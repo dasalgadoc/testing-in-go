@@ -16,6 +16,7 @@ type studentSearcherTestScenario struct {
 	studentFake     repository.StudentRepository
 	studentStub     repository.StudentRepository
 	studentMock     *database.MockStudentRepository
+	studentDummy    repository.StudentRepository
 
 	err  error
 	test *testing.T
@@ -50,15 +51,24 @@ func TestStudentSearcher_SearchStudentMockRepo(t *testing.T) {
 	assert.Equal(s.test, s.student, s.retrieveStudent)
 }
 
+func TestStudentSearch_SearchStudentDummyRepo(t *testing.T) {
+	s := startStudentSearcherTestScenario(t)
+	s.givenStudent("45215570-0296-11ee-8566-acde48001122", "John Doe", 30)
+	s.whenSearchStudentWithDummyRepo("45215570-0296-11ee-8566-acde48001122")
+
+	assert.NoError(s.test, s.err)
+}
+
 /*-- Steps --*/
 func startStudentSearcherTestScenario(t *testing.T) *studentSearcherTestScenario {
 	t.Parallel()
 
 	return &studentSearcherTestScenario{
-		studentFake: database.NewInMemoryStudentRepository(),
-		studentStub: database.NewStubStudentRepository(),
-		studentMock: new(database.MockStudentRepository),
-		test:        t,
+		studentFake:  database.NewInMemoryStudentRepository(),
+		studentStub:  database.NewStubStudentRepository(),
+		studentMock:  new(database.MockStudentRepository),
+		studentDummy: database.NewDummyStudentRepository(),
+		test:         t,
 	}
 }
 
@@ -111,5 +121,10 @@ func (s *studentSearcherTestScenario) whenSearchStudentWithStubRepo(id string) {
 
 func (s *studentSearcherTestScenario) whenSearchStudentWithMockRepo(id string) {
 	target := NewStudentSearcher(s.studentMock)
+	s.retrieveStudent, s.err = target.SearchStudent(id)
+}
+
+func (s *studentSearcherTestScenario) whenSearchStudentWithDummyRepo(id string) {
+	target := NewStudentSearcher(s.studentDummy)
 	s.retrieveStudent, s.err = target.SearchStudent(id)
 }

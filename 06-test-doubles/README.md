@@ -1,1 +1,1 @@
-Fakes, stubs and mocks
+Fakes, stubs, dummies and mocks
