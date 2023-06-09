@@ -21,7 +21,7 @@ func (ss StudentSignUp) SignUpStudent(name string, age int) error {
 	}
 
 	_, err = ss.studentRepo.Search(*studentId)
-	if err != nil {
+	if err == nil {
 		return errors.New("student already exists")
 	}
 

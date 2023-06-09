@@ -3,6 +3,7 @@ package database
 import (
 	"dasalgadoc.com/go-testing/06-test-doubles/domain"
 	"dasalgadoc.com/go-testing/06-test-doubles/repository"
+	"github.com/pkg/errors"
 )
 
 type VanillaSpyStudentRepository struct {
@@ -31,5 +32,5 @@ func (r *VanillaSpyStudentRepository) Save(student domain.Student) error {
 func (r *VanillaSpyStudentRepository) Search(id domain.StudentId) (domain.Student, error) {
 	r.SearchCalled = true
 	r.SearchCalledTimes += 1
-	return domain.Student{}, nil
+	return domain.Student{}, errors.New("student not found")
 }
