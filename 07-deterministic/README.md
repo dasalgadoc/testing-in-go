@@ -1,14 +1,13 @@
 # 👨🏻‍🌾 Good Practices
 
 ## 📋 Table of contents
-1. [Test who randomly fails](#Test who randomly fails)
-2. [Deterministic tests](#Deterministic tests)
-3. [SRP](#SRP in test)
-4. [Given-When-Then](#Given-When-Then)
-5. [TCR](#TCR)
-
-7. [Githooks](#Githooks)
-8. [Guidelines](#Guidelines)
+1. Test who randomly fails
+2. Deterministic tests
+3. SRP
+4. Given-When-Then
+5. TCR
+7. Githooks
+8. Guidelines
 
 ## 😵‍💫 Test who randomly fails
 
