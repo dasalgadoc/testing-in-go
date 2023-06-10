@@ -1,11 +1,21 @@
-# testing-in-go
-Project to explore basic test techniques in Go
+<h1 align="center">
+  🚀 🐹 Testing techniques in Go 🐹 🚀 
+</h1>
+
+<p align="center">
+    <a href="#"><img src="https://img.shields.io/badge/technology-go-blue.svg" alt="Go"/></a>
+</p>
+
+<p align="center">
+  This repository contains a project to explore basic test techniques in Go.
+</p>
 
 ## 🧲 Environment Setup
 
 ### 🛠️ Needed tools
 
 1. Go 1.18 or higher
+2. Docker and docker compose are recommended but not required
 
 ### 🏃🏻 Application execution
 
@@ -31,19 +41,49 @@ go test ./...
 - [Docker test](https://github.com/ory/dockertest)
 - [Test Containers](https://github.com/testcontainers/testcontainers-go)
 - [Test with Cucumber](https://github.com/cucumber/godog)
-- [Go by Example: Testing](https://gobyexample.com/testing)
-- [Go Testing Tutorial](https://tutorialedge.net/golang/intro-testing-in-go/)
 - [Gin](https://github.com/gin-gonic/gin)
-  
-docker exec -it <DOCKER> bash
-mysql -u root -p
-docker ps | awk '{print $1}' | xargs docker stop
 
-04
-Assert Equals y Assert same
-pararell test
-Make file para flujos de ci
+## 📝 Useful commands
+
+- Go test commands
+
+Run all
+```bash
+go test -v ./...
+```
+
+Get coverage
+```bash
+go test -cover
+```
+
+Profiling tests
+```bash
+go test -coverprofile=coverage.out
+go tool cover -func=coverage.out
+go tool cover -html=coverage.out
+go tool cover -html=coverage.out -o coverage.html
+```
+
+More profiling
+```bash
+go test -cpuprofile=cpu.out
+go tool pprof cpu.out
+```
+
+- Want to check your dockers?
+```bash
+docker ps
+
+docker exec -it <DOCKER_ID/NAME> bash
+mysql -u root -p
+
+docker ps | awk '{print $1}' | xargs docker stop
+```
+
+- Makefile for CI pipeline flows
 ```bash
 make
+make run-tests
 ```
-Exclusiones
+
