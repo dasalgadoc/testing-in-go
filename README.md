@@ -10,6 +10,10 @@
   This repository contains a project to explore basic test techniques in Go.
 </p>
 
+__Notes__: 
+- All test are passing, even the bad ones.
+- To explore similar techniques in Java, please check [this repository](https://github.com/dasalgadoc/testing-in-java)
+
 ## 🧲 Environment Setup
 
 ### 🛠️ Needed tools
