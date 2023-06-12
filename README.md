@@ -13,6 +13,8 @@
 __Notes__: 
 - All test are passing, even the bad ones.
 - To explore similar techniques in Java, please check [this repository](https://github.com/dasalgadoc/testing-in-java)
+- In the Java Repository, I make an interesting VO refactor to avoid the usage of the `new` keyword. In Go, we don't have this problem because we don't have constructors.
+Also, I already explore the VO refactor in go in this [repository](https://github.com/dasalgadoc/best-go-examples) So, I won't repeat it here.
 
 ## 🧲 Environment Setup
 
@@ -37,6 +39,11 @@ go get .
 ```bash
 go test ./...
 ```
+or 
+```bash
+make test
+```
+🧐
 5. Enjoy! 😎
 
 ## 📚 References
