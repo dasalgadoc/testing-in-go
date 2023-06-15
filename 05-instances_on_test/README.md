@@ -50,6 +50,8 @@ In test, this pattern takes the form of a small piece of code that returns a new
 
 You can combine builder with the random data generation to create complex instances with half define and half random data.
 
+- Object mother is a set of static functions.
+
 ## ❗️ Object mother with named parameters
 
 Named parameters are a language feature that allows you to pass parameters to a function in any order. This feature is not available in Go, but we can emulate it with a function that receives a map of parameters.
@@ -67,3 +69,15 @@ func GenerateRandomInstance(data map[string]any) *SomeStruct {
 	// ... generate random data or use values defined in data map
 }
 ```
+
+### 🧪 Object mother as solution to test Value Objects and Aggregates.
+
+Value Objects are objects that represent a value and they are immutable, two value objects with the same value are equal.
+Aggregate root can be a set of value objects and entities that are related to each other.
+
+Object mothers are a good solution to test Value Objects and Aggregates for the next reasons:
+
+- The initialization of values objects is isolated by object mothers, thus if the domain modeling changes, we simply need to alter the object mother.
+- Random data makes it possible to establish different values for each test, which is helpful for testing the behavior of the code with various data while concentrating just on supply the test determinant data.
+- Data can be generated randomly through libraries like [gofakeit](https://github.com/brianvoe/gofakeit) or [faker](https://github.com/icrowley/fake). Remember generate deterministic test!, For instance random age on an overage test.
+- Random data allows you to generate some unexpected cases from exotic data.
