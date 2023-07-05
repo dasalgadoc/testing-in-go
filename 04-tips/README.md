@@ -11,13 +11,21 @@ To exclude some files from testing, you can use the follow comments at the top o
 
 This will exclude the file from testing when running `go test ./...`.
 
+But in some cases, its necessary to exclude ONE test from file and no the entire file. To do so, you can use the `t.SkipNow()` function.
+
+```go
+func TestSomething(t *testing.T) {
+    t.SkipNow()
+}
+```
+
 ## 2️⃣ Parallel testing
 
 Run test in parallel it is a good practice to improve the performance of your test suite. 
 To do so, you can use the `-p` flag when running `go test` or add the `t.Parallel()` function in your test.
 
 ```go 
-func TestSomet *testing.T) {
+func TestSome(t *testing.T) {
     t.Parallel()
 }
 ```
